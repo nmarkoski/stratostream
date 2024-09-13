@@ -76,16 +76,16 @@ export default async function ArtistView({ params }: {
                                           className="rounded-full w-full shadow-[0_3px_9px_-2px_rgba(0,0,0,0.7)]"
                             />
                         </ArtistMenu>
-                        <div className="flex flex-col md:gap-1 text-zinc-150">
+                        <div className="flex flex-col gap-1 text-zinc-150">
                             <span
-                                className="text-xl md:text-3xl font-extrabold drop-shadow-[0_2.5px_1.5px_rgba(0,0,0,0.8)]">{artist.name}
+                                className="text-xl md:text-3xl leading-5 font-extrabold drop-shadow-[0_2.5px_1.5px_rgba(0,0,0,0.8)]">{artist.name}
                             </span>
                             <span
-                                className="text-lg md:text-2xl font-base pb-3 md:pb-6 drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">{artist.followers.total.toLocaleString()} followers
+                                className="text-lg md:text-2xl leading-5 font-base pb-3 md:pb-6 drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">{artist.followers.total.toLocaleString()} followers
                             </span>
                             <DialogTrigger asChild>
                                 <button
-                                    className="w-fit text-sm md:text-base drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)] text-start hover:underline">
+                                    className="w-fit text-sm md:text-base leading-5 drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)] text-start hover:underline">
                                     Similar artists
                                 </button>
                             </DialogTrigger>

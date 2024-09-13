@@ -18,6 +18,7 @@ import Link from "next/link";
 import {useEffect, useState} from "react";
 import setUserDeviceID from "@/utils/spotify/setUserDeviceID";
 import {HoverCard, HoverCardTrigger, HoverCardContent} from "@/components/ui/hover-card";
+import {DesktopFlex, MobileFlex} from "@/components/devices";
 
 export default function Seekbar({spotifyToken} : {spotifyToken: string | null | undefined}) {
 
@@ -38,6 +39,8 @@ export default function Seekbar({spotifyToken} : {spotifyToken: string | null | 
 }
 
 function SeekbarLayout() {
+    const [isActiveMobile, setIsActiveMobile] = useState(false);
+    const [isClickedMobile, setIsClickedMobile] = useState(false);
 
     const player = useSpotifyPlayer();
     const device = usePlayerDevice();
@@ -55,6 +58,10 @@ function SeekbarLayout() {
             player?.removeListener('ready');
         }
     })
+
+    useEffect(() => {
+        setIsActiveMobile(isActive);
+    }, [isActive]);
 
     // const currentTrack = useCurrentTrack();
     // const player = useSpotifyPlayer();
@@ -82,29 +89,59 @@ function SeekbarLayout() {
     // })
 
     return (
-        <footer className="flex flex-row justify-center items-center min-h-24 dark:bg-zinc-800/10 shadow-t-md z-20">
-            {
-                isActive ?
-                    <SeekbarInfo currentTrack={currentTrack} className="flex-grow-0 w-[25%] pl-4 md:pl-6"/>
-                    :
-                    null
-            }
-            <SeekbarControls
-                player={player}
-                state={state}
-                device={device}
-                isActive={isActive}
-                className="max-w-[50%] h-full flex-1"
-            />
-            {
-                isActive ?
-                    <div className="flex-grow-0 flex items-center justify-end text-center w-[25%] pr-2 md:pr-6">
-                        <SeekbarImage currentTrack={currentTrack} className="w-20 rounded-md select-none"/>
-                    </div>
-                    :
-                    null
-            }
-        </footer>
+        <>
+            <DesktopFlex className="flex-row justify-center items-center min-h-24 dark:bg-zinc-800/10 shadow-t-md z-20">
+                {
+                    isActive ?
+                        <SeekbarInfo currentTrack={currentTrack} className="flex-grow-0 w-[25%] pl-4 md:pl-6"/>
+                        :
+                        null
+                }
+                <SeekbarControls
+                    player={player}
+                    state={state}
+                    device={device}
+                    isActive={isActive}
+                    className="max-w-[50%] h-full flex-1"
+                />
+                {
+                    isActive ?
+                        <div className="flex-grow-0 flex items-center justify-end text-center w-[25%] pr-2 md:pr-6">
+                            <SeekbarImage currentTrack={currentTrack} className="w-20 rounded-md select-none"/>
+                        </div>
+                        :
+                        null
+                }
+            </DesktopFlex>
+            <MobileFlex className={cn('h-0 transition-height overflow-hidden bg-zinc-800/10 shadow-t-md', isClickedMobile ? 'h-16' : '')}>
+                {
+                    isActive ?
+                        <SeekbarInfo currentTrack={currentTrack} className="pl-4 pt-2 h-16"/>
+                        :
+                        null
+                }
+            </MobileFlex>
+            <MobileFlex className="flex-row justify-center items-center min-h-24 px-4 dark:bg-zinc-800/10 z-20">
+                <SeekbarControls
+                    player={player}
+                    state={state}
+                    device={device}
+                    isActive={isActive}
+                    className="h-full flex-1 transition-width"
+                />
+                <div
+                    className={cn('flex-grow-0 flex items-center justify-center transition-all', isActiveMobile ? 'ml-3' : '')}
+                    onClick={() => setIsClickedMobile(!isClickedMobile)}
+                >
+                    {
+                        isActive ?
+                            <SeekbarInfo currentTrack={currentTrack} className={cn('w-0 rounded-md select-none transition-width', isActiveMobile ? 'w-[calc(100vw - 3rem)]' : '')}/>
+                            :
+                            null
+                    }
+                </div>
+            </MobileFlex>
+        </>
     );
 }
 
@@ -112,13 +149,13 @@ function SeekbarInfo({currentTrack, className}: {
     currentTrack: Spotify.Track,
 } & React.HTMLProps<HTMLDivElement>) {
     return (
-        <div className={cn(className, 'flex flex-col gap-1')}>
+        <div className={cn(className, 'flex flex-col md:gap-1')}>
             <span className="text-lg md:text-xl font-semibold text-nowrap truncate">
                 <Link href={`/albums/${currentTrack.album.uri.slice(14)}`}>
                     <span className="hover:underline">{currentTrack.name}</span>
                 </Link>
             </span>
-            <span className="text-xs md:text-sm font-light dark:text-zinc-300">{currentTrack.artists.map((artist, index) => {
+            <span className="text-sm font-light dark:text-zinc-300">{currentTrack.artists.map((artist, index) => {
                 return (
                     <div key={artist.uri} className="inline-block">
                         <Link href={`/artists/${artist.uri.slice(15)}`}>
@@ -184,7 +221,7 @@ function SeekbarControls({player, state, device, isActive, className}: {
 } & React.HTMLProps<HTMLDivElement>) {
     return (
         <div className={cn(className, 'flex flex-col justify-evenly items-center')}>
-            <div className="flex flex-row justify-center items-center gap-5 drop-shadow-md">
+            <div className="flex flex-row justify-center items-center gap-4 md:gap-5 drop-shadow-md">
                 <Button
                     size="icon"
                     variant="ghost-mobile"
