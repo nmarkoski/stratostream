@@ -64,7 +64,7 @@ export default async function Home() {
 
     return (
         <>
-            <div className="p-4 pb-6 md:p-0 md:content-center md:h-[51%]">
+            <div className="p-3 pb-4 md:p-0 md:content-center md:h-[51%]">
                 <div className="flex flex-row items-center pl-2 pb-4 md:pl-10 md:pb-4 drop-shadow-md">
                     <Music strokeWidth={3} className="mr-2 h-7 w-7"/>
                     <span className="text-3xl font-bold pl-2">
@@ -96,7 +96,7 @@ export default async function Home() {
                 </div>
             </DesktopFlex>
             <MobileBlock>
-                <div className="p-4 pb-6 md:p-0 md:pt-8 md:pb-11">
+                <div className="p-3 pb-4 md:p-0 md:pt-8 md:pb-11">
                     <div className="flex flex-row items-center pl-2 pb-4 md:pl-10 md:pb-4 drop-shadow-md">
                         <Disc strokeWidth={3} className="mr-2 h-7 w-7"/>
                         <span className="text-3xl font-bold pl-2">
@@ -106,7 +106,7 @@ export default async function Home() {
                     <ItemCarousel items={topAlbums.slice(0, 22)} slideVariant="full"/>
                 </div>
                 <Separator/>
-                <div className="p-4 pb-6 md:p-0 md:pt-8 md:pb-11">
+                <div className="p-3 pb-4 md:p-0 md:pt-8 md:pb-11">
                     <div className="flex flex-row items-center pl-2 pb-4 md:pl-10 md:pb-4 drop-shadow-md">
                         <MicVocal strokeWidth={3} className="mr-2 h-7 w-7"/>
                         <span className="text-3xl font-bold pl-2">

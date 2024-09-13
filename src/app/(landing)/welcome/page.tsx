@@ -14,9 +14,9 @@ import StratostreamLogo from "@/app/(landing)/welcome/StratostreamLogo";
 export default function CardWithForm({searchParams}: { searchParams: { message: string } }) {
 
     return (
-        <Card>
-            <CardHeader className="p-8">
-                <div className="dark:brightness-200 dark:contrast-125 w-96 h-36">
+        <Card className="mx-3 md:mx-0 w-[30rem]">
+            <CardHeader className="flex justify-center items-center p-6 md:p-8 pb-10 md:pb-16">
+                <div className="dark:brightness-200 dark:contrast-125 w-full">
                     <StratostreamLogo/>
                 </div>
             </CardHeader>

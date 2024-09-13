@@ -49,10 +49,10 @@ export default function SearchBar() {
     };
 
     return (
-        <div className="pb-16">
+        <div className="pb-14 md:pb-16">
             <div className={cn('absolute w-full pb-4 overflow-hidden z-30')}>
-                <div className={cn('transition-transform transform-gpu', isOpened ? '' : '-translate-y-16')}>
-                    <div className={cn(`flex justify-center items-center px-4 py-3 bg-zinc-100/20 dark:bg-zinc-800/20 backdrop-blur-sm shadow-md drop-shadow-sm`)}>
+                <div className={cn('transition-transform', isOpened ? '' : '-translate-y-14 md:-translate-y-16')}>
+                    <div className={cn(`flex justify-center items-center px-3 md:px-4 py-2 md:py-3 bg-zinc-100/20 dark:bg-zinc-800/20 backdrop-blur-sm shadow-md drop-shadow-sm`)}>
                         <Input
                             type="text"
                             placeholder={`Search for ${path.slice(1)}...`}
@@ -60,7 +60,7 @@ export default function SearchBar() {
                             autoFocus={true}
                             spellCheck={false}
                             onChange={handleSearch}
-                            className="text-lg font-semibold rounded-full pl-4 bg-white/95 dark:bg-black/90"
+                            className="text-base md:text-lg font-semibold rounded-full pl-4 bg-white/95 dark:bg-black/90"
                         />
                     </div>
                     <Separator/>

@@ -36,7 +36,7 @@ export default async function Artists({searchParams}: {
     const result = await spotify.search(searchParams['s'], ['artist'], undefined, 50)
 
     return (
-        <div className="px-4 py-4 md:py-3.5">
+        <div className="p-3 md:px-4 md:py-3.5">
             {
                 result.artists.total > 0 ?
                     <>

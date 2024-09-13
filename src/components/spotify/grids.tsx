@@ -5,7 +5,7 @@ import {AlbumCard, ArtistCard, SkeletonCard, TrackCard} from "@/components/spoti
 function BaseGrid({children, className}: React.HTMLProps<HTMLDivElement>) {
 
     return(
-        <div className={cn(className, 'grid gap-3 grid-cols-[repeat(auto-fit,minmax(10rem,max-content))]')}>
+        <div className={cn(className, 'grid gap-3 grid-cols-[repeat(auto-fit,minmax(9rem,max-content))] md:grid-cols-[repeat(auto-fit,minmax(10rem,max-content))]')}>
             {children}
         </div>
     );
@@ -68,7 +68,7 @@ export function SkeletonGrid({length, variant, className}: {
 } & React.HTMLProps<HTMLDivElement>) {
 
     return (
-        <div className={cn('grid gap-3 grid-cols-[repeat(auto-fit,minmax(10rem,1fr))]', className)}>
+        <div className={cn('grid gap-3 grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] md:grid-cols-[repeat(auto-fit,minmax(10rem,1fr))]', className)}>
             {
                 Array(length).fill(null).map((_, index) => (
                     <SkeletonCard

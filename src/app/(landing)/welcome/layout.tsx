@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 export default function Layout({children}: { children: React.ReactNode }) {
     return (
         <>
-            <main className="flex-grow flex justify-center items-center overflow-auto">
+            <main className="flex-grow flex justify-center items-center overflow-y-auto">
                 {children}
             </main>
         </>

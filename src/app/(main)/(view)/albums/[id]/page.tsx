@@ -54,7 +54,7 @@ export default async function AlbumView({ params }: {
                 style={{backgroundImage: `url(${album.images[0]?.url || '/placeholder.png'})`, backgroundPosition: 'center'}}
             >
                 <div className="flex-1 flex flex-row justify-center items-center p-8 gap-10 md:gap-14 bg-black/25 backdrop-blur-2xl backdrop-saturate-125 backdrop-contrast-125">
-                    <AlbumMenu album={album} className="flex justify-center items-center size-56 md:size-64">
+                    <AlbumMenu album={album} className="flex-1 md:flex-none flex justify-center items-center min-w-32 md:w-64">
                         <SpotifyImage imgData={{
                             src: album.images[0]?.url,
                             alt: album.name,
@@ -64,10 +64,10 @@ export default async function AlbumView({ params }: {
                                       className="rounded-lg w-full shadow-[0_3px_9px_-2px_rgba(0,0,0,0.7)]"
                         />
                     </AlbumMenu>
-                    <div className="flex flex-col gap-1 text-zinc-150">
+                    <div className="flex flex-col md:gap-1 text-zinc-150">
                         <span
-                            className="text-3xl font-extrabold drop-shadow-[0_2.5px_1.5px_rgba(0,0,0,0.8)]">{album.name}</span>
-                        <span className="text-2xl font-base pb-3 md:pb-6  drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">
+                            className="text-xl md:text-3xl font-extrabold drop-shadow-[0_2.5px_1.5px_rgba(0,0,0,0.8)]">{album.name}</span>
+                        <span className="text-lg md:text-2xl font-base pb-2 md:pb-6  drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">
                             {album.artists.map((artist, index) => {
                                 return (
                                     <div key={artist.id} className="inline-block">
@@ -80,13 +80,13 @@ export default async function AlbumView({ params }: {
                                 );
                             })}
                         </span>
-                        <span className="drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">
+                        <span className="text-sm md:text-base drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">
                             {album.release_date.slice(0, 4)}
                         </span>
-                        <span className="drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">
+                        <span className="text-sm md:text-base drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">
                             {`${album.total_tracks} track${album.total_tracks > 1 ? 's' : ''}`}
                         </span>
-                        <span className="drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">
+                        <span className="text-sm md:text-base drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">
                             {msToDurationView(album.tracks.items.reduce((acc, track) => {
                                 return acc + track.duration_ms
                             }, 0))}
@@ -97,13 +97,13 @@ export default async function AlbumView({ params }: {
             <Separator/>
             {
                 album.album_type == 'single' ?
-                    <div className="h-80 flex justify-center items-center p-4">
+                    <div className="h-60 md:h-80 flex justify-center items-center p-3 md:p-4">
                         <div className="flex justify-center items-center">
-                            <SimplifiedTrackCard track={album.tracks.items[0]} index={1} context={album.uri} className="w-[12rem]"/>
+                            <SimplifiedTrackCard track={album.tracks.items[0]} index={1} context={album.uri} className="w-[9.6rem] md:w-[12rem]"/>
                         </div>
                     </div>
                     :
-                    <div className="h-80 content-center p-4">
+                    <div className="h-60 md:h-80 content-center p-3 md:p-4">
                         <ItemCarousel items={album.tracks.items} context={album.uri} slideVariant="full"/>
                     </div>
             }

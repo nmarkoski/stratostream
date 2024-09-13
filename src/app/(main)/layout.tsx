@@ -8,7 +8,7 @@ export default function Layout({children}: { children: React.ReactNode }) {
         <>
             <Header/>
             <Separator/>
-            <div className="flex-1 flex flex-col overflow-auto slim-scroll">
+            <div className="flex-1 flex flex-col overflow-y-auto slim-scroll">
                 {children}
             </div>
             <Separator/>

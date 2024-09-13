@@ -11,7 +11,7 @@ export default function Loading() {
     }
 
     return (
-        <div className="px-4 py-4 md:py-3.5 pr-[calc(1rem+7px)] overflow-hidden">
+        <div className="p-3 md:px-4 md:py-3.5 pr-[calc(0.75rem+4px)] md:pr-[calc(1rem+7px)] overflow-hidden">
             <SkeletonGrid length={50} variant={1} />
         </div>
     );

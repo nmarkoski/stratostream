@@ -66,7 +66,7 @@ export default async function ArtistView({ params }: {
                 >
                     <div
                         className="flex-1 flex flex-row justify-center items-center p-8 gap-10 md:gap-14 bg-white/25 dark:bg-black/25 backdrop-blur-2xl backdrop-saturate-125 backdrop-contrast-125">
-                        <ArtistMenu artist={artist} className="flex justify-center items-center size-56 md:size-64">
+                        <ArtistMenu artist={artist} className="flex-1 md:flex-none flex justify-center items-center min-w-32 md:w-64">
                             <SpotifyImage imgData={{
                                 src: artist.images[0]?.url,
                                 alt: artist.name,
@@ -76,16 +76,16 @@ export default async function ArtistView({ params }: {
                                           className="rounded-full w-full shadow-[0_3px_9px_-2px_rgba(0,0,0,0.7)]"
                             />
                         </ArtistMenu>
-                        <div className="flex flex-col gap-1 text-zinc-150">
+                        <div className="flex flex-col md:gap-1 text-zinc-150">
                             <span
-                                className="text-3xl font-extrabold drop-shadow-[0_2.5px_1.5px_rgba(0,0,0,0.8)]">{artist.name}
+                                className="text-xl md:text-3xl font-extrabold drop-shadow-[0_2.5px_1.5px_rgba(0,0,0,0.8)]">{artist.name}
                             </span>
                             <span
-                                className="text-2xl font-base pb-3 md:pb-6 drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">{artist.followers.total.toLocaleString()} followers
+                                className="text-lg md:text-2xl font-base pb-3 md:pb-6 drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">{artist.followers.total.toLocaleString()} followers
                             </span>
                             <DialogTrigger asChild>
                                 <button
-                                    className="w-fit drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)] text-start hover:underline">
+                                    className="w-fit text-sm md:text-base drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)] text-start hover:underline">
                                     Similar artists
                                 </button>
                             </DialogTrigger>
@@ -127,11 +127,11 @@ export default async function ArtistView({ params }: {
                     </div>
                 </DesktopFlex>
                 <MobileBlock>
-                    <div className="p-4">
+                    <div className="p-3 md:p-4">
                         {
                             artistTopTracks.tracks.length > 0 ?
                                 <>
-                                    <span className="inline-block text-3xl font-bold pb-3 drop-shadow-md">
+                                    <span className="inline-block text-2xl md:text-3xl font-bold pb-3 drop-shadow-md">
                                         {`${artist.name}${artist.name.slice(-1).toLowerCase() === 's' ? "'" : "'s"} top tracks`}
                                     </span>
                                     <ItemCarousel items={artistTopTracks.tracks} slideVariant="full"/>
@@ -141,11 +141,11 @@ export default async function ArtistView({ params }: {
                         }
                     </div>
                     <Separator/>
-                    <div className="p-4">
+                    <div className="p-3 pb-6 md:pb-4 md:p-4">
                         {
                             artistAlbums.items.length > 0 ?
                                 <>
-                                    <span className="inline-block text-3xl font-bold pb-3 drop-shadow-md">
+                                    <span className="inline-block text-2xl md:text-3xl font-bold pb-3 drop-shadow-md">
                                         {`${artist.name}${artist.name.slice(-1).toLowerCase() === 's' ? "'" : "'s"} albums`}
                                     </span>
                                     <ItemCarousel items={artistAlbums.items} slideVariant="full"/>
