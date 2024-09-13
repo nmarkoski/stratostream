@@ -135,7 +135,7 @@ function SeekbarLayout() {
                 >
                     {
                         isActive ?
-                            <SeekbarInfo currentTrack={currentTrack} className={cn('w-0 rounded-md select-none transition-width', isActiveMobile ? 'w-[calc(100vw - 3rem)]' : '')}/>
+                            <SeekbarImage currentTrack={currentTrack} className={cn('w-0 rounded-md select-none transition-width', isActiveMobile ? 'w-[4.8rem]' : '')}/>
                             :
                             null
                     }
