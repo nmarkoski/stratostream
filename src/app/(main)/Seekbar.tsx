@@ -60,7 +60,11 @@ function SeekbarLayout() {
     })
 
     useEffect(() => {
-        setIsActiveMobile(isActive);
+        const timer = setTimeout(() => {
+            setIsActiveMobile(isActive);
+        }, 150);
+
+        return () => clearTimeout(timer);
     }, [isActive]);
 
     // const currentTrack = useCurrentTrack();
@@ -113,10 +117,10 @@ function SeekbarLayout() {
                         null
                 }
             </DesktopFlex>
-            <MobileFlex className={cn('h-0 transition-height overflow-hidden bg-zinc-800/10 shadow-t-md', isClickedMobile ? 'h-16' : '')}>
+            <MobileFlex className={cn('h-0 transition-height overflow-hidden bg-zinc-800/10', isClickedMobile ? 'h-16' : '')}>
                 {
                     isActive ?
-                        <SeekbarInfo currentTrack={currentTrack} className="pl-4 pt-2 h-16"/>
+                        <SeekbarInfo currentTrack={currentTrack} className="w-full pl-4 pt-2 h-16"/>
                         :
                         null
                 }
