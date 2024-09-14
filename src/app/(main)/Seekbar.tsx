@@ -8,7 +8,7 @@ import {
     usePlayerDevice,
     PlayerDevice
 } from "react-spotify-web-playback-sdk";
-import {Pause, Play, SkipBack, SkipForward} from "lucide-react";
+import {Pause, Play, Repeat, Shuffle, SkipBack, SkipForward} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {Slider} from "@/components/ui/slider";
 import {msToDurationSeek} from "@/utils/msToDuration";
@@ -19,6 +19,7 @@ import {useEffect, useState} from "react";
 import setUserDeviceID from "@/utils/spotify/setUserDeviceID";
 import {HoverCard, HoverCardTrigger, HoverCardContent} from "@/components/ui/hover-card";
 import {DesktopFlex, MobileFlex} from "@/components/devices";
+import {toast, useToast} from "@/hooks/use-toast";
 
 export default function Seekbar({spotifyToken} : {spotifyToken: string | null | undefined}) {
 
@@ -223,9 +224,22 @@ function SeekbarControls({player, state, device, isActive, className}: {
     device: PlayerDevice | null,
     isActive: boolean
 } & React.HTMLProps<HTMLDivElement>) {
+
     return (
         <div className={cn(className, 'flex flex-col justify-evenly items-center')}>
             <div className="flex flex-row justify-center items-center gap-4 md:gap-5 drop-shadow-md">
+                <Button
+                    size="icon"
+                    variant="ghost-mobile"
+                    className="rounded-full size-10 p-[0.65rem] transition"
+                    onClick={() => console.log('Shuffle')}
+                    disabled={!isActive || state?.disallows.toggling_repeat_context}
+                >
+                    <Shuffle
+                        className="size-full"
+                        strokeWidth={2.2}
+                    />
+                </Button>
                 <Button
                     size="icon"
                     variant="ghost-mobile"
@@ -272,6 +286,18 @@ function SeekbarControls({player, state, device, isActive, className}: {
                     disabled={!isActive || !state?.track_window.next_tracks.length || state?.disallows.skipping_next}
                 >
                     <SkipForward
+                        className="size-full"
+                        strokeWidth={2.2}
+                    />
+                </Button>
+                <Button
+                    size="icon"
+                    variant="ghost-mobile"
+                    className="rounded-full size-10 p-[0.65rem] transition"
+                    onClick={() => console.log('Repeat')}
+                    disabled={!isActive || state?.disallows.toggling_repeat_context}
+                >
+                    <Repeat
                         className="size-full"
                         strokeWidth={2.2}
                     />
