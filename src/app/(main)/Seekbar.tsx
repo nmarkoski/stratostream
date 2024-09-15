@@ -227,11 +227,11 @@ function SeekbarControls({player, state, device, isActive, className}: {
 
     return (
         <div className={cn(className, 'flex flex-col justify-evenly items-center')}>
-            <div className="flex flex-row justify-center items-center drop-shadow-md">
+            <div className="w-full flex flex-row justify-between md:justify-center items-center md:gap-5 drop-shadow-md">
                 <Button
                     size="icon"
                     variant="ghost-mobile"
-                    className="rounded-full size-10 p-[0.65rem] md:mr-5 transition"
+                    className="rounded-full size-10 p-[0.65rem] transition"
                     onClick={() => console.log('Shuffle')}
                     disabled={!isActive || state?.disallows.toggling_repeat_context}
                 >
@@ -243,7 +243,7 @@ function SeekbarControls({player, state, device, isActive, className}: {
                 <Button
                     size="icon"
                     variant="ghost-mobile"
-                    className="rounded-full size-10 p-[0.6rem] mr-2.5 md:mr-5 transition"
+                    className="rounded-full size-10 p-[0.6rem] transition"
                     onClick={() => player?.previousTrack()}
                     // No state checks because it still serves as skipping to the start of the current track
                     disabled={!isActive}
@@ -281,7 +281,7 @@ function SeekbarControls({player, state, device, isActive, className}: {
                 <Button
                     size="icon"
                     variant="ghost-mobile"
-                    className="rounded-full size-10 p-[0.6rem] ml-2.5 md:ml-5 transition"
+                    className="rounded-full size-10 p-[0.6rem] transition"
                     onClick={() => player?.nextTrack()}
                     disabled={!isActive || !state?.track_window.next_tracks.length || state?.disallows.skipping_next}
                 >
@@ -293,7 +293,7 @@ function SeekbarControls({player, state, device, isActive, className}: {
                 <Button
                     size="icon"
                     variant="ghost-mobile"
-                    className="rounded-full size-10 p-[0.65rem] md:ml-1 transition"
+                    className="rounded-full size-10 p-[0.65rem] transition"
                     onClick={() => console.log('Repeat')}
                     disabled={!isActive || state?.disallows.toggling_repeat_context}
                 >

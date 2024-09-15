@@ -66,7 +66,7 @@ export default async function ArtistView({ params }: {
                 >
                     <div
                         className="flex-1 flex flex-row justify-center items-center p-8 gap-10 md:gap-14 bg-white/25 dark:bg-black/25 backdrop-blur-2xl backdrop-saturate-125 backdrop-contrast-125">
-                        <ArtistMenu artist={artist} className="flex-1 md:flex-none flex justify-center items-center min-w-32 md:w-64">
+                        <ArtistMenu artist={artist} className="flex-1 md:flex-none flex justify-center items-center min-w-32 md:max-w-64">
                             <SpotifyImage imgData={{
                                 src: artist.images[0]?.url,
                                 alt: artist.name,
