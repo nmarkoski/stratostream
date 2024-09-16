@@ -8,7 +8,7 @@ import {
     usePlayerDevice,
     PlayerDevice
 } from "react-spotify-web-playback-sdk";
-import {Pause, Play, Repeat, Shuffle, SkipBack, SkipForward} from "lucide-react";
+import {Pause, Play, Repeat, Repeat1, Shuffle, SkipBack, SkipForward} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {Slider} from "@/components/ui/slider";
 import {msToDurationSeek} from "@/utils/msToDuration";
@@ -20,6 +20,7 @@ import setUserDeviceID from "@/utils/spotify/setUserDeviceID";
 import {HoverCard, HoverCardTrigger, HoverCardContent} from "@/components/ui/hover-card";
 import {DesktopFlex, MobileFlex} from "@/components/devices";
 import {toast, useToast} from "@/hooks/use-toast";
+import {changeSpotifyPlaybackSettings} from "@/utils/spotify/player";
 
 export default function Seekbar({spotifyToken} : {spotifyToken: string | null | undefined}) {
 
@@ -225,12 +226,45 @@ function SeekbarControls({player, state, device, isActive, className}: {
     isActive: boolean
 } & React.HTMLProps<HTMLDivElement>) {
 
+    const repeatModeId: {
+        [key: number]: {
+            icon: JSX.Element,
+            name: 'off' | 'track' | 'context',
+            next: number
+        }
+    } = {
+        0: {
+            icon: <Repeat
+                className="size-full"
+                strokeWidth={2.2}
+            />,
+            name: 'off',
+            next: 1,
+        },
+        1: {
+            icon: <Repeat1
+                className="size-full"
+                strokeWidth={2.2}
+            />,
+            name: 'track',
+            next: 2,
+        },
+        2: {
+            icon: <Repeat
+                className="size-full"
+                strokeWidth={2.2}
+            />,
+            name: 'context',
+            next: 0
+        }
+    }
+
     return (
         <div className={cn(className, 'flex flex-col justify-evenly items-center')}>
             <div className="w-full flex flex-row justify-between md:justify-center items-center md:gap-5 drop-shadow-md">
                 <Button
                     size="icon"
-                    variant="ghost-mobile"
+                    variant="inverse-mobile"
                     className="rounded-full size-10 p-[0.65rem] transition"
                     onClick={() => console.log('Shuffle')}
                     disabled={!isActive || state?.disallows.toggling_repeat_context}
@@ -292,15 +326,14 @@ function SeekbarControls({player, state, device, isActive, className}: {
                 </Button>
                 <Button
                     size="icon"
-                    variant="ghost-mobile"
+                    variant={state?.repeat_mode ? 'default-mobile' : 'ghost-mobile'}
                     className="rounded-full size-10 p-[0.65rem] transition"
-                    onClick={() => console.log('Repeat')}
+                    onClick={() => changeSpotifyPlaybackSettings({
+                        repeat: repeatModeId[repeatModeId[state?.repeat_mode ?? 0].next].name
+                    })}
                     disabled={!isActive || state?.disallows.toggling_repeat_context}
                 >
-                    <Repeat
-                        className="size-full"
-                        strokeWidth={2.2}
-                    />
+                    {repeatModeId[state?.repeat_mode ?? 0].icon}
                 </Button>
             </div>
             <div className="flex flex-row justify-center items-center gap-4 w-full">

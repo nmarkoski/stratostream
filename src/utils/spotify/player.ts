@@ -63,3 +63,52 @@ export async function playSpotifyContent({ contextUri, offset, trackUris }: {
         };
     }
 }
+
+export async function changeSpotifyPlaybackSettings({
+                                                        shuffle,
+                                                        repeat
+                                                    }: {
+    shuffle?: boolean;
+    repeat?: 'off' | 'track' | 'context';
+}) {
+    const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("No user found");
+
+    if (!user.user_metadata?.spotify_premium) {
+        console.error("User does not have premium Spotify subscription:", user.user_metadata);
+        return {
+            message: "Premium Spotify subscription required",
+            description: "Changing playback settings requires a premium Spotify subscription. If you have a premium subscription, please reauthenticate."
+        };
+    }
+
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.provider_token || !session?.provider_refresh_token) {
+        throw new Error("No Spotify session found");
+    }
+
+    const spotify = SpotifyApi.withAccessToken(process.env.SPOTIFY_CLIENT_ID!, {
+        access_token: session.provider_token,
+        refresh_token: session.provider_refresh_token,
+        token_type: session.token_type,
+        expires_in: session.expires_in,
+    });
+
+    try {
+        if (shuffle !== undefined) {
+            await spotify.player.togglePlaybackShuffle(shuffle);
+        }
+
+        if (repeat !== undefined) {
+            await spotify.player.setRepeatMode(repeat);
+        }
+    } catch (error) {
+        console.error("Error changing playback settings:", error);
+        return {
+            message: "Failed to change playback settings",
+            description: "An error occurred while trying to update the playback settings."
+        };
+    }
+}
