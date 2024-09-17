@@ -26,9 +26,9 @@ export default async function Tracks({searchParams}: {
         fetch: (input, init) => {
             return fetch(input, {
                 ...init,
-                // next: {
-                //     revalidate: 600
-                // }
+                next: {
+                    tags: ['region']
+                }
             })
         }
     })

@@ -65,7 +65,7 @@ export default async function ArtistView({ params }: {
                     }}
                 >
                     <div
-                        className="flex-1 flex flex-row justify-center items-center p-8 gap-10 md:gap-14 bg-white/25 dark:bg-black/25 backdrop-blur-2xl backdrop-saturate-125 backdrop-contrast-125">
+                        className="flex-1 flex flex-row justify-center items-center p-8 gap-10 md:gap-14 bg-black/25 backdrop-blur-2xl backdrop-saturate-125 backdrop-contrast-125">
                         <ArtistMenu artist={artist} className="flex-1 md:flex-none flex justify-center items-center min-w-32 md:max-w-64">
                             <SpotifyImage imgData={{
                                 src: artist.images[0]?.url,
@@ -76,7 +76,7 @@ export default async function ArtistView({ params }: {
                                           className="rounded-full w-full shadow-[0_3px_9px_-2px_rgba(0,0,0,0.7)]"
                             />
                         </ArtistMenu>
-                        <div className="flex flex-col gap-1 text-zinc-150">
+                        <div className="flex flex-col gap-1 text-zinc-100">
                             <span
                                 className="text-xl md:text-3xl leading-5 font-extrabold drop-shadow-[0_2.5px_1.5px_rgba(0,0,0,0.8)]">{artist.name}
                             </span>

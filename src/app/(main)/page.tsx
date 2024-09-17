@@ -5,10 +5,12 @@ import {ItemCarousel} from "@/components/spotify/carousels";
 import {Disc, MicVocal, Music} from "lucide-react";
 import {DesktopFlex, MobileBlock} from "@/components/devices";
 import chunkArray from "@/utils/chunkArray";
+import getPlaylistIdFromRegion from "@/utils/spotify/getPlaylistIdFromRegion";
 
 export default async function Home() {
     const supabase = createClient();
     const {data: {session}} = await supabase.auth.getSession()
+    const {data: {user}} = await supabase.auth.getUser();
 
     if (!session?.provider_token || !session.provider_refresh_token) return null;
 
@@ -21,9 +23,9 @@ export default async function Home() {
         fetch: (input, init) => {
             return fetch(input, {
                 ...init,
-                // next: {
-                //     revalidate: 1800
-                // }
+                next: {
+                    tags: ['region']
+                }
             })
         }
     });
@@ -31,7 +33,7 @@ export default async function Home() {
     // const currentUser = await spotify.currentUser.profile();
     // const currentUserMarket = currentUser.country as Market;
 
-    const top50PlaylistID = '37i9dQZEVXbMDoHDwVN2tF';
+    const top50PlaylistID = await getPlaylistIdFromRegion(user?.user_metadata.region_preference);
 
     const top50Playlist = await spotify.playlists.getPlaylistItems(top50PlaylistID, undefined, undefined, 50);
 

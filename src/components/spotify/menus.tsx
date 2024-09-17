@@ -165,8 +165,7 @@ export function AlbumMenu({children, className, album}: {
                 </ContextMenuSub>
                 <ContextMenuSeparator/>
                 <ContextMenuItem onClick={() => playSpotifyContent({
-                    contextUri: album.uri,
-                    offset: 0
+                    contextUri: album.uri
                 })}>
                     <Play className="mr-2 h-4 w-4"/>
                     <span>Play</span>
