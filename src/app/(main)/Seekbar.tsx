@@ -242,19 +242,19 @@ function SeekbarControls({player, state, device, isActive, className}: {
             next: 1,
         },
         1: {
-            icon: <Repeat1
-                className="size-full"
-                strokeWidth={2.2}
-            />,
-            name: 'track',
-            next: 2,
-        },
-        2: {
             icon: <Repeat
                 className="size-full"
                 strokeWidth={2.2}
             />,
             name: 'context',
+            next: 2,
+        },
+        2: {
+            icon: <Repeat1
+                className="size-full"
+                strokeWidth={2.2}
+            />,
+            name: 'track',
             next: 0
         }
     }
@@ -264,10 +264,12 @@ function SeekbarControls({player, state, device, isActive, className}: {
             <div className="w-full flex flex-row justify-between md:justify-center items-center md:gap-5 drop-shadow-md">
                 <Button
                     size="icon"
-                    variant="inverse-mobile"
+                    variant={state?.shuffle ? 'default-mobile' : 'ghost-mobile'}
                     className="rounded-full size-10 p-[0.65rem] transition"
-                    onClick={() => console.log('Shuffle')}
-                    disabled={!isActive || state?.disallows.toggling_repeat_context}
+                    onClick={() => changeSpotifyPlaybackSettings({
+                        shuffle: !state?.shuffle
+                    })}
+                    disabled={!isActive || state?.disallows.toggling_shuffle}
                 >
                     <Shuffle
                         className="size-full"

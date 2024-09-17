@@ -52,7 +52,7 @@ function UserMenu({userName, onSignOutClick, children}: {
                         Home
                     </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem asChild disabled={true}>
                     <Link href="/my-playlists">
                         <ListMusic className="mr-2 h-4 w-4"/>
                         My Playlists

@@ -7,7 +7,7 @@ import {msToDurationView} from "@/utils/msToDuration";
 import {ItemCarousel} from "@/components/spotify/carousels";
 import {SimplifiedTrackCard} from "@/components/spotify/cards";
 import Link from "next/link";
-import {AlbumMenu} from "@/components/spotify/menus";
+import {AlbumMenu, ArtistMenu} from "@/components/spotify/menus";
 
 export default async function AlbumView({ params }: {
     params: { id: string }
@@ -63,19 +63,21 @@ export default async function AlbumView({ params }: {
                                       className="rounded-lg w-full shadow-[0_3px_9px_-2px_rgba(0,0,0,0.7)]"
                         />
                     </AlbumMenu>
-                    <div className="flex flex-col gap-1 text-zinc-150">
+                    <div className="flex flex-col gap-1 text-zinc-100">
                         <span
                             className="text-xl md:text-3xl leading-5 font-extrabold drop-shadow-[0_2.5px_1.5px_rgba(0,0,0,0.8)]">{album.name}</span>
                         <span className="text-lg md:text-2xl leading-5 font-base pb-2 md:pb-6 drop-shadow-[0_2px_1.5px_rgba(0,0,0,0.8)]">
                             {album.artists.map((artist, index) => {
                                 return (
-                                    <div key={artist.id} className="inline-block">
-                                        <Link href={`/artists/${artist.id}`}>
-                                            <span className="hover:underline">{artist.name}</span>
-                                        </Link>
-                                        <span
-                                            className="whitespace-pre">{index < album.artists.length - 1 ? ', ' : ''}</span>
-                                    </div>
+                                    <ArtistMenu key={artist.id} artist={artist}>
+                                        <div className="inline-block">
+                                            <Link href={`/artists/${artist.id}`}>
+                                                <span className="hover:underline">{artist.name}</span>
+                                            </Link>
+                                            <span
+                                                className="whitespace-pre">{index < album.artists.length - 1 ? ', ' : ''}</span>
+                                        </div>
+                                    </ArtistMenu>
                                 );
                             })}
                         </span>
