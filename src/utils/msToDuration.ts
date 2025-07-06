@@ -1,5 +1,4 @@
 export const msToDurationView = (ms: number) => {
-
     const seconds = Math.floor(ms / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
@@ -19,8 +18,8 @@ export const msToDurationView = (ms: number) => {
         result.push(`${remainingSeconds} sec`);
     }
 
-    return result.join(', ');
-}
+    return result.join(", ");
+};
 
 export const msToDurationSeek = (ms: number) => {
     const seconds = Math.floor(ms / 1000);
@@ -29,5 +28,5 @@ export const msToDurationSeek = (ms: number) => {
 
     const remainingSeconds = seconds % 60;
 
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 };

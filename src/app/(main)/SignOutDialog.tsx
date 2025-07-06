@@ -6,15 +6,15 @@ import {
     AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogCancel,
-    AlertDialogAction
-} from '@/components/ui/alert-dialog'
-import {Button, ButtonProps} from "@/components/ui/button";
-import {useFormStatus} from "react-dom";
-import {LoaderCircle} from "lucide-react";
-import {signOut} from "@/utils/supabase/signOut"
+    AlertDialogAction,
+} from "@/components/ui/alert-dialog";
+import { Button, ButtonProps } from "@/components/ui/button";
+import { useFormStatus } from "react-dom";
+import { LoaderCircle } from "lucide-react";
+import { signOut } from "@/utils/supabase/signOut";
 
-function SignOutButton({formAction}: ButtonProps) {
-    const {pending, action} = useFormStatus();
+function SignOutButton({ formAction }: ButtonProps) {
+    const { pending, action } = useFormStatus();
     const isPending = pending && action === formAction;
 
     return (
@@ -24,29 +24,36 @@ function SignOutButton({formAction}: ButtonProps) {
             formAction={formAction}
             disabled={isPending}
         >
-            {isPending ? <LoaderCircle className="h-4 w-4 animate-spin"/> : 'Sign Out'}
+            {isPending ? (
+                <LoaderCircle className="h-4 w-4 animate-spin" />
+            ) : (
+                "Sign Out"
+            )}
         </Button>
     );
 }
 
-function SignOutForm({formAction}: ButtonProps) {
+function SignOutForm({ formAction }: ButtonProps) {
     return (
         <form className="w-full md:w-fit">
-            <SignOutButton formAction={formAction}/>
+            <SignOutButton formAction={formAction} />
         </form>
     );
 }
 
-export default function SignOutDialog({open, onOpenChange}: ButtonProps & {
-    open: boolean
-    onOpenChange: React.Dispatch<React.SetStateAction<boolean>>
+export default function SignOutDialog({
+    open,
+    onOpenChange,
+}: ButtonProps & {
+    open: boolean;
+    onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
     return (
         <AlertDialog open={open} onOpenChange={onOpenChange}>
             <AlertDialogContent
                 onCloseAutoFocus={(e) => {
-                    e.preventDefault()
-                    e.stopPropagation()
+                    e.preventDefault();
+                    e.stopPropagation();
                 }}
             >
                 <AlertDialogHeader>
@@ -57,11 +64,14 @@ export default function SignOutDialog({open, onOpenChange}: ButtonProps & {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction asChild onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                    }}>
-                        <SignOutForm formAction={signOut}/>
+                    <AlertDialogAction
+                        asChild
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }}
+                    >
+                        <SignOutForm formAction={signOut} />
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

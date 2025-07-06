@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef } from "react";
@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function SearchBar() {
-    const [searchString, setSearchString] = useState('');
+    const [searchString, setSearchString] = useState("");
     const [isOpened, setIsOpened] = useState(false);
     const isTyping = useRef(false);
     const path = usePathname();
@@ -16,7 +16,7 @@ export default function SearchBar() {
 
     // Effect to sync URL with search bar on navigation
     useEffect(() => {
-        const currentSearchParam = searchParams.get('s');
+        const currentSearchParam = searchParams.get("s");
         if (currentSearchParam && !isTyping.current) {
             setSearchString(currentSearchParam);
         }
@@ -27,7 +27,10 @@ export default function SearchBar() {
         const timeout = setTimeout(() => {
             isTyping.current = false;
             if (searchString.trim()) {
-                router.push(`${path}?s=${encodeURIComponent(searchString.trim())}`, { scroll: false });
+                router.push(
+                    `${path}?s=${encodeURIComponent(searchString.trim())}`,
+                    { scroll: false },
+                );
             } else {
                 router.push(path, { scroll: false });
             }
@@ -50,9 +53,18 @@ export default function SearchBar() {
 
     return (
         <div className="pb-14 md:pb-16">
-            <div className={cn('absolute w-full pb-4 overflow-hidden z-30')}>
-                <div className={cn('transition-transform', isOpened ? '' : '-translate-y-14 md:-translate-y-16')}>
-                    <div className={cn(`flex justify-center items-center px-3 md:px-4 py-2 md:py-3 bg-zinc-100/20 dark:bg-zinc-800/20 backdrop-blur-sm shadow-md drop-shadow-sm`)}>
+            <div className={cn("absolute w-full pb-4 overflow-hidden z-30")}>
+                <div
+                    className={cn(
+                        "transition-transform",
+                        isOpened ? "" : "-translate-y-14 md:-translate-y-16",
+                    )}
+                >
+                    <div
+                        className={cn(
+                            `flex justify-center items-center px-3 md:px-4 py-2 md:py-3 bg-zinc-100/20 dark:bg-zinc-800/20 backdrop-blur-sm shadow-md drop-shadow-sm`,
+                        )}
+                    >
                         <Input
                             type="text"
                             placeholder={`Search for ${path.slice(1)}...`}
@@ -63,7 +75,7 @@ export default function SearchBar() {
                             className="text-base md:text-lg font-semibold rounded-full pl-4 bg-white/95 dark:bg-black/90"
                         />
                     </div>
-                    <Separator/>
+                    <Separator />
                 </div>
             </div>
         </div>

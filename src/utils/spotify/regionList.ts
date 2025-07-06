@@ -1,4 +1,4 @@
-export const regionList : {
+export const regionList: {
     [key: string]: {
         name: string;
         playlistId: string;
@@ -6,14 +6,14 @@ export const regionList : {
 } = {
     global: {
         name: "🗺️ Global",
-        playlistId: "5FN6Ego7eLX6zHuCMovIR2"
+        playlistId: "5FN6Ego7eLX6zHuCMovIR2",
     },
     US: {
         name: "🇺🇸 US",
-        playlistId: "2wL85pEZpKBGkLh1Xp99Ms"
+        playlistId: "2wL85pEZpKBGkLh1Xp99Ms",
     },
     UK: {
         name: "🇬🇧 UK",
-        playlistId: "1uQxyDbSSoHENhCZN05qgU"
+        playlistId: "1uQxyDbSSoHENhCZN05qgU",
     },
 };

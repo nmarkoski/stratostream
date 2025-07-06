@@ -1,10 +1,10 @@
-import {Separator} from "@/components/ui/separator";
-import {DesktopFlex, MobileBlock} from "@/components/devices";
-import {SkeletonCarousel} from "@/components/spotify/carousels";
-import {Skeleton} from "@/components/ui/skeleton";
+import { Separator } from "@/components/ui/separator";
+import { DesktopFlex, MobileBlock } from "@/components/devices";
+import { SkeletonCarousel } from "@/components/spotify/carousels";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
-    return(
+    return (
         <>
             <Skeleton className="flex-1 flex">
                 <Skeleton className="flex-1 flex flex-row justify-center items-center p-8 gap-10 md:gap-14 bg-black/25">
@@ -16,27 +16,43 @@ export default function Loading() {
                     </div>
                 </Skeleton>
             </Skeleton>
-            <Separator/>
+            <Separator />
             <DesktopFlex className="h-80 flex flex-row justify-center items-center">
                 <div className="w-[49.9%] py-4">
                     <Skeleton className="w-[45%] h-9 ml-12 mb-4 drop-shadow-md" />
-                    <SkeletonCarousel length={4} variant={1}  slideVariant="half"/>
+                    <SkeletonCarousel
+                        length={4}
+                        variant={1}
+                        slideVariant="half"
+                    />
                 </div>
-                <Separator orientation="vertical"/>
+                <Separator orientation="vertical" />
                 <div className="w-[49.9%] py-4">
                     <Skeleton className="w-[45%] h-9 ml-12 mb-4 drop-shadow-md" />
-                    <SkeletonCarousel length={4} variant={1} slideVariant="half"/>
+                    <SkeletonCarousel
+                        length={4}
+                        variant={1}
+                        slideVariant="half"
+                    />
                 </div>
             </DesktopFlex>
             <MobileBlock>
                 <div className="p-3">
                     <Skeleton className="w-[77%] h-8 mb-3 drop-shadow-md" />
-                    <SkeletonCarousel length={4} variant={1}  slideVariant="full"/>
+                    <SkeletonCarousel
+                        length={4}
+                        variant={1}
+                        slideVariant="full"
+                    />
                 </div>
-                <Separator/>
+                <Separator />
                 <div className="p-3 pb-6">
                     <Skeleton className="w-[77%] h-8 mb-3 drop-shadow-md" />
-                    <SkeletonCarousel length={4} variant={1}  slideVariant="full"/>
+                    <SkeletonCarousel
+                        length={4}
+                        variant={1}
+                        slideVariant="full"
+                    />
                 </div>
             </MobileBlock>
         </>

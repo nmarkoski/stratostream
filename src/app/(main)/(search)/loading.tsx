@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import {SkeletonGrid} from "@/components/spotify/grids";
-import {useSearchParams} from "next/navigation";
+import { SkeletonGrid } from "@/components/spotify/grids";
+import { useSearchParams } from "next/navigation";
 
 export default function Loading() {
-    const searchParam = useSearchParams().get('s');
+    const searchParam = useSearchParams().get("s");
 
-    if(!(searchParam?.trim())) {
+    if (!searchParam?.trim()) {
         return null;
     }
 

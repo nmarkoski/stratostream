@@ -1,15 +1,14 @@
-"use client"
+"use client";
 
 import Image from "next/image";
-import {cn} from "@/lib/utils";
-import {useState} from "react";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 export type ImageSizes = {
-    base: string
-    sm: string
-    md: string
-}
-
+    base: string;
+    sm: string;
+    md: string;
+};
 
 export type ImageData = {
     src?: string;
@@ -23,9 +22,9 @@ export type ImageData = {
 };
 
 export function SpotifyImage({
-                                 imgData,
-                                 className
-                             }: {
+    imgData,
+    className,
+}: {
     imgData: ImageData;
 } & React.HTMLProps<HTMLImageElement>) {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -33,7 +32,7 @@ export function SpotifyImage({
 
     return (
         <Image
-            src={imgData?.src || '/placeholder.png'}
+            src={imgData?.src || "/placeholder.png"}
             alt={imgData.alt}
             width={imgData.width || 640}
             height={imgData.height || 640}
@@ -42,12 +41,12 @@ export function SpotifyImage({
             placeholder="empty"
             onLoad={(image) => {
                 setIsLoaded(true);
-                image.currentTarget.classList.remove('opacity-0');
+                image.currentTarget.classList.remove("opacity-0");
             }}
             className={cn(
-                'object-cover aspect-square self-center rounded-md transition-opacity',
-                fadeIn && !isLoaded ? 'opacity-0' : 'opacity-100',
-                className
+                "object-cover aspect-square self-center rounded-md transition-opacity",
+                fadeIn && !isLoaded ? "opacity-0" : "opacity-100",
+                className,
             )}
         />
     );

@@ -1,16 +1,22 @@
-"use client"
+"use client";
 
-import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {useTheme} from "next-themes";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { useTheme } from "next-themes";
 
 export default function ThemeSelect() {
-
     const { theme, setTheme } = useTheme();
 
-    return(
-        <Select onValueChange={(value => setTheme(value))}>
+    return (
+        <Select onValueChange={(value) => setTheme(value)}>
             <SelectTrigger className="w-36">
-                <SelectValue placeholder="System"/>
+                <SelectValue placeholder="System" />
             </SelectTrigger>
             <SelectContent>
                 <SelectGroup>
