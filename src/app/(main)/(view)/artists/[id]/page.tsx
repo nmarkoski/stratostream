@@ -1,5 +1,5 @@
 import {createClient} from "@/utils/supabase/server";
-import {SpotifyApi} from "@spotify/web-api-ts-sdk";
+import {Artist, SpotifyApi} from "@spotify/web-api-ts-sdk";
 import {notFound} from "next/navigation";
 import {Separator} from "@/components/ui/separator";
 import {SpotifyImage} from "@/components/spotify/images";
@@ -49,7 +49,22 @@ export default async function ArtistView({ params }: {
     const artistAlbums = await spotify.artists.albums(params.id, 'album,single', undefined, 50);
     const artistTopTracks = await spotify.artists.topTracks(params.id, 'MK')
 
-    const artistSimilar = await spotify.artists.relatedArtists(params.id);
+    const artistSimilar = {
+        artists: Array.from({ length: 10 }, (_, i) => ({
+            id: `mock-artist-${i + 1}`,
+            name: `Artist ${i + 1}`,
+            type: "artist",
+            uri: `spotify:artist:mock-artist-${i + 1}`,
+            href: "",
+            external_urls: { spotify: "" },
+            images: [
+                { url: "https://placehold.co/250x250", width: 640, height: 640 }
+            ],
+            followers: { href: "", total: 0 },
+            genres: [], // string[]
+            popularity: 0
+        })) as Artist[]
+    };
 
     return(
         <>
